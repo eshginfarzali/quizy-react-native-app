@@ -1,7 +1,8 @@
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import React from 'react';
-import { Image, ImageBackground, StyleSheet, View, Dimensions, Text, TouchableOpacity } from 'react-native';
+import { Image, ImageBackground, StyleSheet, View, Dimensions, Text,  TouchableOpacity  } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -9,12 +10,12 @@ const windowHeight = Dimensions.get('window').height;
 const imageBackground = require('../assets/images/background.png');
 const logoImage = require('../assets/images/logo.png');
 const illImage = require('../assets/images/illustration.png');
-const arrowWImage = require('../assets/images/arrowWhite.png');
-const arrowPImage = require('../assets/images/arrowPurple.png');
+const arrowWImage = require('../assets/icons/arrowWhite.png');
+const arrowPImage = require('../assets/icons/arrowPurple.png');
 
 type RootStackParamList = {
   Options: undefined;
-  Login: undefined;
+  Login: undefined ;
   Register: undefined;
 
 };
@@ -22,15 +23,15 @@ type RootStackParamList = {
 type OptionsScreenNavigationProp = NativeStackNavigationProp<RootStackParamList, 'Options'>;
 
 export const OptionsScreen = () => {
-
   const navigation = useNavigation<OptionsScreenNavigationProp>();
 
   const goToLogin = () => {
     navigation.navigate('Login');
-};
-const goToRegister = () => {
+  };
+
+  const goToRegister = () => {
     navigation.navigate('Register');
-};
+  };
 
 
   return (

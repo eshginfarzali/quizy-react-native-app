@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useNavigation } from '@react-navigation/native';import { Image, ImageBackground, StyleSheet, View, Dimensions } from 'react-native';
+import { useNavigation } from '@react-navigation/native';import { Image, ImageBackground, StyleSheet, View, Dimensions, TouchableOpacity } from 'react-native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 const windowWidth = Dimensions.get('window').width;
@@ -24,11 +24,15 @@ export const WelcomeScreen = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       navigation.navigate('Options');
-    }, 5000);
+    }, 6000);
 
     return () => clearTimeout(timer);
   }, [navigation]);
 
+
+  const goToLogin = () => {
+    navigation.navigate('Options');
+  };
 
   return (
     <View style={styles.container}>
@@ -37,7 +41,11 @@ export const WelcomeScreen = () => {
         style={styles.imageBackground}
       >
         <View style={styles.logoContainer}>
+        <TouchableOpacity
+          onPress={goToLogin}
+        >
           <Image source={logoImage} style={styles.logo} />
+          </TouchableOpacity>
         </View>
       </ImageBackground>
     </View>
