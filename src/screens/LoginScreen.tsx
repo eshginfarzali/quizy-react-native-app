@@ -1,60 +1,86 @@
 import * as React from 'react';
 import { useNavigation } from '@react-navigation/native';
-import { StyleSheet, View, Image, Text, TouchableOpacity, TextInput, Button, Alert } from 'react-native';
+import { StyleSheet, View, Image, Text, TouchableOpacity, TextInput, Alert } from 'react-native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { useForm, Controller } from "react-hook-form";
+import { useForm, Controller } from 'react-hook-form';
+import { openDatabase } from 'react-native-sqlite-storage';
 
 const arrowBackIcons = require('../assets/icons/arrowBack.png');
 const arrowWImage = require('../assets/icons/arrowWhite.png');
 
+const db = openDatabase({
+  name: 'rn_sqlite',
+});
 
 type RootStackParamList = {
-  Login: undefined;
+  Home: undefined;
   Options: undefined;
 };
+
 type FormData = {
   email: string;
   password: string;
 };
 
-type WelcomeScreenNavigationProp = NativeStackNavigationProp<RootStackParamList, 'Login'>;
-
-
+type WelcomeScreenNavigationProp = NativeStackNavigationProp<RootStackParamList, 'Options'>;
 
 export const LoginScreen = () => {
   const navigation = useNavigation<WelcomeScreenNavigationProp>();
-  const goToLogin = () => {
-    navigation.navigate('Options');
-  };
 
-  const { register, setValue, handleSubmit, control, reset, formState: { errors } } = useForm({
+  const { handleSubmit, control } = useForm<FormData>({
     defaultValues: {
       email: '',
-      password: ''
-    }
+      password: '',
+    },
   });
-  const onSubmit = (data: any) => {
-    console.log(data);
+
+  const onSubmit = async (data: FormData) => {
+    const { email, password } = data;
+
+    // Check credentials from the database
+    try {
+      const dbResult = await checkUserCredentials(email, password);
+      if (dbResult) {
+        navigation.navigate('Home');
+      } else {
+        Alert.alert('Error', 'Invalid email or password');
+      }
+    } catch (error) {
+      console.error('Error checking credentials:', error);
+    }
   };
 
-
-
-  console.log('errors', errors);
+  const checkUserCredentials = async (email: string, password: string): Promise<boolean> => {
+    return new Promise(async (resolve, reject) => {
+      (await db).transaction((tx) => {
+        tx.executeSql(
+          'SELECT * FROM users WHERE email = ? AND password = ?',
+          [email, password],
+          (_, results) => {
+            if (results.rows.length > 0) {
+              resolve(true);
+            } else {
+              resolve(false); 
+            }
+          },
+          (_, error) => {
+            reject(error);
+          }
+        );
+      });
+    });
+  };
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity
-        onPress={goToLogin}
-      >
+      <TouchableOpacity onPress={() => navigation.navigate('Options')}>
         <View style={styles.headerContainer}>
           <Image source={arrowBackIcons} />
           <Text style={styles.textLogin}>Login</Text>
         </View>
       </TouchableOpacity>
       <View style={styles.loginFormContainer}>
-
         <View>
-
           <Text style={styles.label}>Email</Text>
           <Controller
             control={control}
@@ -62,8 +88,9 @@ export const LoginScreen = () => {
               <TextInput
                 style={styles.input}
                 onBlur={onBlur}
-                onChangeText={value => onChange(value)}
+                onChangeText={(value) => onChange(value)}
                 value={value}
+                placeholder="Enter email"
               />
             )}
             name="email"
@@ -78,42 +105,32 @@ export const LoginScreen = () => {
               <TextInput
                 style={styles.input}
                 onBlur={onBlur}
-                onChangeText={value => onChange(value)}
+                onChangeText={(value) => onChange(value)}
                 value={value}
+                placeholder="Enter password"
+                secureTextEntry={true}
               />
             )}
             name="password"
             rules={{ required: true }}
           />
         </View>
-
-
-
-        <View >
-          <TouchableOpacity
-
-            onPress={handleSubmit(onSubmit)}
-          >
-            <View style={styles.btnLogin}>
-              <Text style={styles.loginText}>Login</Text>
-
-              <Image source={arrowWImage} style={styles.arrowWImage} />
-            </View>
-          </TouchableOpacity>
-
-        </View>
+        <TouchableOpacity onPress={handleSubmit(onSubmit)}>
+          <View style={styles.btnLogin}>
+            <Text style={styles.loginText}>Login</Text>
+            <Image source={arrowWImage} style={styles.arrowWImage} />
+          </View>
+        </TouchableOpacity>
       </View>
     </View>
-
-
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#EFEEFC',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
   },
   headerContainer: {
     flexDirection: 'row',
@@ -129,24 +146,20 @@ const styles = StyleSheet.create({
     letterSpacing: 0,
     color: '#001833',
   },
-
   loginFormContainer: {
     justifyContent: 'center',
     alignItems: 'center',
     paddingBottom: 50,
   },
-
   label: {
     fontFamily: 'Poppins',
     fontSize: 18,
     fontWeight: '400',
     lineHeight: 21,
     color: '#121212',
-    marginBottom:5,
-    marginTop:25,
+    marginBottom: 5,
+    marginTop: 25,
   },
-
-
   input: {
     backgroundColor: 'white',
     width: 311,
@@ -154,6 +167,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     borderColor: '#6A5AE0',
     borderWidth: 1,
+    paddingLeft: 5,
   },
   btnLogin: {
     width: 311,
@@ -165,7 +179,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: 25,
   },
-
   loginText: {
     fontSize: 16,
     fontWeight: '600',
@@ -174,10 +187,9 @@ const styles = StyleSheet.create({
     color: '#fff',
     marginRight: 100,
   },
-
   arrowWImage: {
-
     marginRight: 10,
   },
-
 });
+
+export default LoginScreen;

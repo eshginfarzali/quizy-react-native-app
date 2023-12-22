@@ -1,0 +1,103 @@
+[
+    {
+      "question": "Who won the FIFA World Cup in 2018?",
+      "options": [
+        "France",
+        "Brazil",
+        "Germany",
+        "Argentina"
+      ],
+      "correct_answer": "France"
+    },
+    {
+      "question": "Which country has won the most Olympic gold medals in history?",
+      "options": [
+        "United States",
+        "China",
+        "Russia",
+        "Germany"
+      ],
+      "correct_answer": "United States"
+    },
+    {
+      "question": "Who is the all-time leading scorer in NBA history?",
+      "options": [
+        "LeBron James",
+        "Kobe Bryant",
+        "Michael Jordan",
+        "Kareem Abdul-Jabbar"
+      ],
+      "correct_answer": "Kareem Abdul-Jabbar"
+    },
+    {
+      "question": "Which city hosted the 2016 Summer Olympics?",
+      "options": [
+        "Beijing",
+        "Rio de Janeiro",
+        "London",
+        "Sydney"
+      ],
+      "correct_answer": "Rio de Janeiro"
+    },
+    {
+      "question": "Who has won the most Formula 1 World Championships?",
+      "options": [
+        "Sebastian Vettel",
+        "Fernando Alonso",
+        "Lewis Hamilton",
+        "Michael Schumacher"
+      ],
+      "correct_answer": "Lewis Hamilton"
+    },
+    {
+      "question": "Which country hosted the 2014 Winter Olympics?",
+      "options": [
+        "Canada",
+        "Norway",
+        "Russia",
+        "South Korea"
+      ],
+      "correct_answer": "Russia"
+    },
+    {
+      "question": "Who is the fastest man in recorded history?",
+      "options": [
+        "Usain Bolt",
+        "Carl Lewis",
+        "Justin Gatlin",
+        "Asafa Powell"
+      ],
+      "correct_answer": "Usain Bolt"
+    },
+    {
+      "question": "Which team has won the most Super Bowl championships?",
+      "options": [
+        "Dallas Cowboys",
+        "New England Patriots",
+        "Pittsburgh Steelers",
+        "San Francisco 49ers"
+      ],
+      "correct_answer": "New England Patriots"
+    },
+    {
+      "question": "Who is the only boxer to win titles in eight different weight classes?",
+      "options": [
+        "Mike Tyson",
+        "Manny Pacquiao",
+        "Floyd Mayweather Jr.",
+        "Sugar Ray Leonard"
+      ],
+      "correct_answer": "Manny Pacquiao"
+    },
+    {
+      "question": "Which golfer has spent the most consecutive weeks ranked number one in the world?",
+      "options": [
+        "Tiger Woods",
+        "Rory McIlroy",
+        "Phil Mickelson",
+        "Jordan Spieth"
+      ],
+      "correct_answer": "Tiger Woods"
+    }
+  ]
+  

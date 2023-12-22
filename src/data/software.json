@@ -1,0 +1,103 @@
+[
+    {
+      "question": "What does HTML stand for?",
+      "options": [
+        "Hyper Text Markup Language",
+        "Hyperlinks and Text Markup Language",
+        "Home Tool Markup Language",
+        "Hyperlink Transfer Markup Language"
+      ],
+      "correct_answer": "Hyper Text Markup Language"
+    },
+    {
+      "question": "Which programming language is known for its readability and simplicity?",
+      "options": [
+        "JavaScript",
+        "Python",
+        "C++",
+        "Ruby"
+      ],
+      "correct_answer": "Python"
+    },
+    {
+      "question": "What does CSS stand for?",
+      "options": [
+        "Cascading Style Sheets",
+        "Creative Style Sheets",
+        "Computer Style Sheets",
+        "Colorful Style Sheets"
+      ],
+      "correct_answer": "Cascading Style Sheets"
+    },
+    {
+      "question": "Who is the founder of Microsoft?",
+      "options": [
+        "Steve Jobs",
+        "Bill Gates",
+        "Jeff Bezos",
+        "Elon Musk"
+      ],
+      "correct_answer": "Bill Gates"
+    },
+    {
+      "question": "What is the name of the version control system commonly used in software development?",
+      "options": [
+        "Git",
+        "SVN",
+        "Mercurial",
+        "CVS"
+      ],
+      "correct_answer": "Git"
+    },
+    {
+      "question": "Which company developed the programming language C#?",
+      "options": [
+        "Microsoft",
+        "Apple",
+        "Google",
+        "Oracle"
+      ],
+      "correct_answer": "Microsoft"
+    },
+    {
+      "question": "What is the process of finding errors and fixing them in a program called?",
+      "options": [
+        "Debugging",
+        "Error Checking",
+        "Compiling",
+        "Testing"
+      ],
+      "correct_answer": "Debugging"
+    },
+    {
+      "question": "What does IDE stand for in the context of software development?",
+      "options": [
+        "Integrated Development Environment",
+        "Interactive Design Environment",
+        "Integrated Design Environment",
+        "Interactive Development Environment"
+      ],
+      "correct_answer": "Integrated Development Environment"
+    },
+    {
+      "question": "Which programming language is used primarily for web development?",
+      "options": [
+        "Java",
+        "Swift",
+        "Ruby",
+        "JavaScript"
+      ],
+      "correct_answer": "JavaScript"
+    },
+    {
+      "question": "What is the name of the widely-used relational database management system?",
+      "options": [
+        "SQLite",
+        "MongoDB",
+        "MySQL",
+        "Redis"
+      ],
+      "correct_answer": "MySQL"
+    }
+  ]
+   
