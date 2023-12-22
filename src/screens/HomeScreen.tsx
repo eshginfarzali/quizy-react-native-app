@@ -10,8 +10,9 @@ const windowHeight = Dimensions.get('window').height;
 
 const imageBackground = require('../assets/images/background.png');
 const starIcon = require('../assets/icons/star.png');
-const dropdownIcon = require('../assets/icons/dropdown.png');
+const dropdownIcon = require('../assets/icons/downward.png');
 const arrowWImage = require('../assets/icons/arrowWhite.png');
+const clockIcon = require('../assets/icons/clock.png');
 
 
 type RootStackParamList = {
@@ -29,9 +30,10 @@ type FormData = {
 
 export const HomeScreen = () => {
     const navigation = useNavigation<HomeScreenNavigationProp>();
-    const { control, handleSubmit } = useForm<FormData>();
+    const { control } = useForm<FormData>();
     const [selectedDifficulty, setSelectedDifficulty] = useState('');
     const [selectedType, setSelectedType] = useState('');
+    const [selectedCategory, setSelectedCategory] = useState('Sport');
     const [selectedOptions, setSelectedOptions] = useState<FormData>({
         category: 'Sport',
         difficulty: 'low',
@@ -43,24 +45,25 @@ export const HomeScreen = () => {
     };
 
 
-
     const handleDifficultySelection = (difficulty: string) => {
         setSelectedDifficulty(difficulty);
         setSelectedOptions({ ...selectedOptions, difficulty });
-        console.log('Selected Difficulty:', difficulty);
     };
 
     const handleTypeSelection = (type: string) => {
         setSelectedType(type);
         setSelectedOptions({ ...selectedOptions, type });
-        console.log('Selected Type:', type);
+    };
+
+    const handleCategorySelection = (category: string) => {
+        setSelectedCategory(category);
+        setSelectedOptions({ ...selectedOptions, category });
     };
 
     const handleStartQuiz = () => {
         console.log('Selected Options:', selectedOptions);
-        // Perform actions related to starting the quiz with selectedOptions
-    };
 
+    };
     return (
         <View style={styles.container}>
             <ImageBackground source={imageBackground} style={styles.imageBackground}>
@@ -71,67 +74,124 @@ export const HomeScreen = () => {
                 </View>
 
                 <View style={styles.formContainer}>
+
+
                     <Controller
                         control={control}
                         render={({ field: { onChange, value } }) => (
                             <>
-                                <Text style={styles.label}>Choose Category:</Text>
-                                <SelectDropdown
-                                    data={['Sport', 'Software']}
-                                    onSelect={(selectedItem) => onChange(selectedItem)}
-                                    defaultButtonText={value || 'Sport'}
-                                    buttonStyle={styles.dropdownButton}
-                                    dropdownStyle={styles.dropdown}
-                                    rowTextStyle={styles.dropdownText}
+                                <View style={styles.labelContainer}>
+                                    <Text style={styles.label}>Choose Category</Text>
+                                </View>
+                                <TouchableOpacity
+                                    onPress={() => {
+
+                                        handleCategorySelection(value);
+                                    }}
+                                >
+                                    <View style={styles.dropdownContainer}>
+                                        <Text style={[styles.label, { color: '#fff', fontSize: 20, }]}>
+                                            {selectedCategory}
+                                        </Text>
+                                        <Image
+                                            source={dropdownIcon}
+                                            style={styles.dropdownIcon}
+                                        />
+                                    </View>
+                                </TouchableOpacity>
+                                <Controller
+                                    control={control}
+                                    render={({ field: { onChange, value } }) => (
+                                        <>
+                                            <SelectDropdown
+                                                data={['Sport', 'Software']}
+                                                onSelect={(selectedItem) => {
+                                                    onChange(selectedItem);
+                                                    handleCategorySelection(selectedItem);
+
+                                                }}
+                                                buttonStyle={styles.dropdownButton}
+                                                dropdownStyle={styles.dropdown}
+                                                rowTextStyle={styles.dropdownText}
+                                                defaultValue={selectedCategory}
+                                                buttonTextStyle={styles.buttonTextStyle}
+                                            />
+                                        </>
+                                    )}
+                                    name="category"
+                                    defaultValue="Sport"
                                 />
                             </>
                         )}
                         name="category"
                         defaultValue="Sport"
                     />
+
+                    <View style={styles.labelContainer}>
+                        <Text style={styles.label}>Choose level</Text>
+                    </View>
                     <View style={styles.buttonRow}>
                         <TouchableOpacity
                             style={[
                                 styles.difficultyButton,
-                                selectedDifficulty === 'low' && styles.selectedButton,
+                                selectedDifficulty === 'low' && styles.selectedButtonLow,
                             ]}
                             onPress={() => handleDifficultySelection('low')}
                         >
-                            <Text style={styles.buttonText}>Low</Text>
+                            <Text
+                                style={[
+                                    styles.buttonText,
+                                    selectedDifficulty === 'low' && styles.selectedButtonText,
+                                ]}
+                            >Low</Text>
                         </TouchableOpacity>
                         <TouchableOpacity
                             style={[
                                 styles.difficultyButton,
-                                selectedDifficulty === 'medium' && styles.selectedButton,
+                                selectedDifficulty === 'medium' && styles.selectedButtonMedium,
                             ]}
                             onPress={() => handleDifficultySelection('medium')}
                         >
-                            <Text style={styles.buttonText}>Medium</Text>
+                            <Text
+                                style={[
+                                    styles.buttonText,
+                                    selectedDifficulty === 'medium' && styles.selectedButtonText,
+                                ]}
+                            >Medium</Text>
+
                         </TouchableOpacity>
                         <TouchableOpacity
                             style={[
                                 styles.difficultyButton,
-                                selectedDifficulty === 'hard' && styles.selectedButton,
+                                selectedDifficulty === 'hard' && styles.selectedButtonHard,
                             ]}
                             onPress={() => handleDifficultySelection('hard')}
                         >
-                            <Text style={styles.buttonText}>Hard</Text>
+                            <Text
+                                style={[
+                                    styles.buttonText,
+                                    selectedDifficulty === 'hard' && styles.selectedButtonText,
+                                ]}
+                            >Hard</Text>
                         </TouchableOpacity>
                     </View>
-
+                    <View style={styles.labelContainer}>
+                        <Text style={styles.label}>Choose type</Text>
+                    </View>
                     <View style={styles.buttonRow}>
                         <TouchableOpacity
                             style={[
                                 styles.typeButton,
-                                selectedType === 'TrueFalse' && styles.selectedButton,
+                                selectedType === 'TrueFalse' && styles.selectedButtonType,
                             ]}
                             onPress={() => handleTypeSelection('TrueFalse')}
                         >
-                            <Text 
-                            style={[
-                                styles.typeButton,
-                                selectedType === 'Multiple' && styles.selectedButtonTypeText,
-                            ]}
+                            <Text
+                                style={[
+                                    styles.typeButtonText,
+                                    selectedType === 'TrueFalse' && styles.selectedButtonTypeText,
+                                ]}
+
                             >True/False</Text>
                         </TouchableOpacity>
                         <TouchableOpacity
@@ -142,23 +202,27 @@ export const HomeScreen = () => {
                             onPress={() => handleTypeSelection('Multiple')}
                         >
                             <Text
-                               style={[
-                                styles.typeButton,
-                                selectedType === 'Multiple' && styles.selectedButtonTypeText,
-                            ]}
-                            
+                                style={[
+                                    styles.typeButtonText,
+                                    selectedType === 'Multiple' && styles.selectedButtonTypeText,
+                                ]}
+
                             >Multiple</Text>
                         </TouchableOpacity>
+                    </View>
+                    <View style={styles.clockConatiner}>
+                        <Image source={clockIcon}/>
+                        <Text style={styles.textClock}>{ selectedDifficulty==='low'?20 :selectedDifficulty==='medium'?15 :10} sec</Text>
                     </View>
                 </View>
                 <View style={styles.footer}>
 
-                <TouchableOpacity  onPress={handleStartQuiz}>
-          <View style={styles.btnLogin}>
-            <Text style={styles.loginText}>Start QUIZ</Text>
-            <Image source={arrowWImage} style={styles.arrowWImage} />
-          </View>
-        </TouchableOpacity>
+                    <TouchableOpacity onPress={handleStartQuiz}>
+                        <View style={styles.btnQuiz}>
+                            <Text style={styles.quizText}>Start QUIZ</Text>
+                            <Image source={arrowWImage} style={styles.arrowWImage} />
+                        </View>
+                    </TouchableOpacity>
                 </View>
 
             </ImageBackground>
@@ -195,6 +259,13 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
     },
+    labelContainer: {
+        width: 330,
+        flexDirection: 'row',
+        justifyContent: 'flex-start',
+        alignItems: 'flex-start',
+        alignContent: 'flex-start',
+    },
     label: {
         fontFamily: 'Poppins',
         fontSize: 14,
@@ -202,28 +273,49 @@ const styles = StyleSheet.create({
         lineHeight: 21,
         textAlign: 'left',
         color: '#fff',
+        justifyContent: 'flex-start',
+        alignItems: 'flex-start',
+        alignContent: 'flex-start',
 
     },
     dropdownButton: {
-        borderWidth: 1,
-        borderRadius: 8,
+
         paddingHorizontal: 16,
         paddingVertical: 12,
         marginBottom: 20,
         width: windowWidth * 0.8,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
+        marginTop: -30,
+        opacity: 0,
+        backgroundColor: '#6A5AE0',
+        color: '#fff',
+
     },
+    buttonTextStyle: {
+        color: '#6A5AE0'
+    },
+    dropdownContainer: {
+        flexDirection: 'row',
+        width: 300,
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        marginBottom:-20,
+        marginLeft:-29,
+    },
+
     dropdown: {
         borderWidth: 1,
         borderRadius: 8,
         width: windowWidth * 0.8,
         backgroundColor: '#fff',
-        marginTop: 4,
+        marginTop: 5,
+        color: '#fff',
+    },
+    dropdownIcon: {
+
     },
     dropdownText: {
-        fontSize: 16,
+        fontSize: 18,
+        color: '#6a5ae0',
     },
     startButton: {
         backgroundColor: '#6A5AE0',
@@ -252,58 +344,104 @@ const styles = StyleSheet.create({
     buttonText: {
         fontSize: 16,
         textAlign: 'center',
-        
+        color: '#6A5AE0',
+        fontFamily: 'Poppins',
+        fontWeight: '600',
+        lineHeight: 24,
+
+    },
+    selectedButtonText: {
+
+        color: '#fff'
+    },
+    selectedButtonLow: {
+        backgroundColor: '#FF9C00',
+
+    },
+    selectedButtonMedium: {
+        backgroundColor: '#31B057',
+
+    },
+    selectedButtonHard: {
+        backgroundColor: '#FD3654',
+
+
     },
     difficultyButton: {
         backgroundColor: '#fff',
-        padding: 12,
+        padding: 15,
         borderRadius: 8,
         flex: 1,
         marginRight: 10,
-        color: '#6A5AE0',
     },
+
     typeButton: {
         backgroundColor: '#fff',
-        padding: 12,
+        padding: 17,
         borderRadius: 8,
         flex: 1,
         marginRight: 10,
+    },
+    selectedButtonType: {
+        backgroundColor: '#5e4ddb',
+
+    },
+    typeButtonText: {
+        fontSize: 16,
+        textAlign: 'center',
         color: '#6A5AE0',
+        fontFamily: 'Poppins',
+        fontWeight: '600',
+        lineHeight: 24,
     },
-    selectedButton: {
-        backgroundColor: '#6A5AE0',
+    selectedButtonTypeText: {
+        color: '#fff', 
     },
-    selectedButtonType:{
-        backgroundColor: '#6A5AE0',
-        
-    },
-    selectedButtonTypeText:{
-        color: '#fff',
-    },
-    btnLogin: {
+
+
+
+    btnQuiz: {
         width: 311,
         height: 60,
         borderRadius: 10,
-        backgroundColor: '#6A5AE0',
+        backgroundColor: '#5e4ddb',
         flexDirection: 'row',
         justifyContent: 'flex-end',
         alignItems: 'center',
         marginTop: 25,
-      },
-      loginText: {
+    },
+    quizText: {
         fontSize: 16,
         fontWeight: '600',
         lineHeight: 24,
         textAlign: 'center',
         color: '#fff',
-        marginRight: 100,
-      },
-      arrowWImage: {
-        marginRight: 1,
-      },
-      footer:{
-        marginBottom:20,
-      }
+        marginRight: 90,
+    },
+    clockConatiner:{
+        flexDirection:'row',
+        justifyContent:'center',
+        alignItems:'center',
+        gap:5,
+    },
+    textClock:{
+        fontFamily: 'Poppins',
+        fontSize: 25,
+        fontWeight: '400',
+        lineHeight: 30,
+        color:'#fff'
+        
+    },
+
+
+
+
+    arrowWImage: {
+        marginRight: 3,
+    },
+    footer: {
+        marginBottom: 20,
+    }
 });
 
 export default HomeScreen;

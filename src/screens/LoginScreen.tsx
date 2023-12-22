@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useNavigation } from '@react-navigation/native';
-import { StyleSheet, View, Image, Text, TouchableOpacity, TextInput, Alert } from 'react-native';
+import { StyleSheet, View, Image, Text, TouchableOpacity, TextInput, Alert, StatusBar } from 'react-native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useForm, Controller } from 'react-hook-form';
 import { openDatabase } from 'react-native-sqlite-storage';
@@ -73,6 +73,9 @@ export const LoginScreen = () => {
 
   return (
     <View style={styles.container}>
+       <StatusBar backgroundColor={'#EFEEFC'} 
+            barStyle="dark-content"
+            />
       <TouchableOpacity onPress={() => navigation.navigate('Options')}>
         <View style={styles.headerContainer}>
           <Image source={arrowBackIcons} />
@@ -168,6 +171,8 @@ const styles = StyleSheet.create({
     borderColor: '#6A5AE0',
     borderWidth: 1,
     paddingLeft: 5,
+    color: '#121212',
+    fontSize:20,
   },
   btnLogin: {
     width: 311,

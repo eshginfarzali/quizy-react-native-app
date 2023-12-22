@@ -1,10 +1,9 @@
 import * as React from 'react';
 import { useNavigation } from '@react-navigation/native';
-import { StyleSheet, View, Image, Text, TouchableOpacity, TextInput, Alert, ScrollView } from 'react-native';
+import { StyleSheet, View, Image, Text, TouchableOpacity, TextInput, Alert, ScrollView, StatusBar } from 'react-native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useForm, Controller } from "react-hook-form";
 import { openDatabase } from "react-native-sqlite-storage";
-
 const db = openDatabase({
   name: "rn_sqlite",
 });
@@ -85,6 +84,9 @@ export const RegisterScreen = () => {
 
   return (
     <ScrollView contentContainerStyle={styles.scrollContainer}>
+            <StatusBar backgroundColor={'#EFEEFC'} 
+            barStyle="dark-content"
+            />
       <View style={styles.container}>
         <TouchableOpacity onPress={goToLogin}>
           <View style={styles.headerContainer}>
@@ -270,6 +272,8 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     borderColor: '#6A5AE0',
     borderWidth: 1,
+    color: '#121212',
+    fontSize:20,
   },
   btnLogin: {
     width: 311,
