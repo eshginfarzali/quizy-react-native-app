@@ -62,6 +62,19 @@ export const HomeScreen = () => {
 
     const handleStartQuiz = () => {
         console.log('Selected Options:', selectedOptions);
+        if(selectedOptions.type==='TrueFalse'){
+            if(selectedOptions.category==="Software"){
+
+            }else if(selectedOptions.category==="Sport"){
+
+            }
+        } else if(selectedOptions.type==='Multiple'){
+            if(selectedOptions.category==="Software"){
+
+            }else if(selectedOptions.category==="Sport"){
+
+            }
+        }
 
     };
     return (

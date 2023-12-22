@@ -1,103 +1,102 @@
 [
-    {
-      "question": "What does HTML stand for?",
-      "options": [
-        "Hyper Text Markup Language",
-        "Hyperlinks and Text Markup Language",
-        "Home Tool Markup Language",
-        "Hyperlink Transfer Markup Language"
-      ],
-      "correct_answer": "Hyper Text Markup Language"
-    },
-    {
-      "question": "Which programming language is known for its readability and simplicity?",
-      "options": [
-        "JavaScript",
-        "Python",
-        "C++",
-        "Ruby"
-      ],
-      "correct_answer": "Python"
-    },
-    {
-      "question": "What does CSS stand for?",
-      "options": [
-        "Cascading Style Sheets",
-        "Creative Style Sheets",
-        "Computer Style Sheets",
-        "Colorful Style Sheets"
-      ],
-      "correct_answer": "Cascading Style Sheets"
-    },
-    {
-      "question": "Who is the founder of Microsoft?",
-      "options": [
-        "Steve Jobs",
-        "Bill Gates",
-        "Jeff Bezos",
-        "Elon Musk"
-      ],
-      "correct_answer": "Bill Gates"
-    },
-    {
-      "question": "What is the name of the version control system commonly used in software development?",
-      "options": [
-        "Git",
-        "SVN",
-        "Mercurial",
-        "CVS"
-      ],
-      "correct_answer": "Git"
-    },
-    {
-      "question": "Which company developed the programming language C#?",
-      "options": [
-        "Microsoft",
-        "Apple",
-        "Google",
-        "Oracle"
-      ],
-      "correct_answer": "Microsoft"
-    },
-    {
-      "question": "What is the process of finding errors and fixing them in a program called?",
-      "options": [
-        "Debugging",
-        "Error Checking",
-        "Compiling",
-        "Testing"
-      ],
-      "correct_answer": "Debugging"
-    },
-    {
-      "question": "What does IDE stand for in the context of software development?",
-      "options": [
-        "Integrated Development Environment",
-        "Interactive Design Environment",
-        "Integrated Design Environment",
-        "Interactive Development Environment"
-      ],
-      "correct_answer": "Integrated Development Environment"
-    },
-    {
-      "question": "Which programming language is used primarily for web development?",
-      "options": [
-        "Java",
-        "Swift",
-        "Ruby",
-        "JavaScript"
-      ],
-      "correct_answer": "JavaScript"
-    },
-    {
-      "question": "What is the name of the widely-used relational database management system?",
-      "options": [
-        "SQLite",
-        "MongoDB",
-        "MySQL",
-        "Redis"
-      ],
-      "correct_answer": "MySQL"
-    }
-  ]
-   
+  {
+      "id": 1,
+      "question": "Who is the founder of Microsoft Corporation?",
+      "answers": [
+          {"text": "Steve Jobs", "correct": false},
+          {"text": "Bill Gates", "correct": true},
+          {"text": "Larry Page", "correct": false},
+          {"text": "Jeff Bezos", "correct": false}
+      ]
+  },
+  {
+      "id": 2,
+      "question": "What does HTML stand for in web development?",
+      "answers": [
+          {"text": "Hyper Text Markup Language", "correct": true},
+          {"text": "Hyperlinking Text Management Language", "correct": false},
+          {"text": "Home Tool Markup Language", "correct": false},
+          {"text": "Hyper Transfer Markup Language", "correct": false}
+      ]
+  },
+  {
+      "id": 3,
+      "question": "Which programming language is often used for developing Android apps?",
+      "answers": [
+          {"text": "Swift", "correct": false},
+          {"text": "Python", "correct": false},
+          {"text": "Java", "correct": true},
+          {"text": "C++", "correct": false}
+      ]
+  },
+  {
+      "id": 4,
+      "question": "Who developed the Python programming language?",
+      "answers": [
+          {"text": "Guido van Rossum", "correct": true},
+          {"text": "Dennis Ritchie", "correct": false},
+          {"text": "Ken Thompson", "correct": false},
+          {"text": "James Gosling", "correct": false}
+      ]
+  },
+  {
+      "id": 5,
+      "question": "What is the purpose of CSS in web development?",
+      "answers": [
+          {"text": "Server-Side Scripting", "correct": false},
+          {"text": "Creating web layouts", "correct": true},
+          {"text": "Database management", "correct": false},
+          {"text": "Algorithm design", "correct": false}
+      ]
+  },
+  {
+      "id": 6,
+      "question": "Which company developed the JavaScript programming language?",
+      "answers": [
+          {"text": "Microsoft", "correct": false},
+          {"text": "Oracle", "correct": false},
+          {"text": "Netscape", "correct": true},
+          {"text": "IBM", "correct": false}
+      ]
+  },
+  {
+      "id": 7,
+      "question": "What is the name of the version control system designed by Linus Torvalds?",
+      "answers": [
+          {"text": "Git", "correct": true},
+          {"text": "SVN", "correct": false},
+          {"text": "Mercurial", "correct": false},
+          {"text": "CVS", "correct": false}
+      ]
+  },
+  {
+      "id": 8,
+      "question": "What does SQL stand for in database management?",
+      "answers": [
+          {"text": "Structured Query Language", "correct": true},
+          {"text": "Simple Query Language", "correct": false},
+          {"text": "Standard Query Logic", "correct": false},
+          {"text": "System Query Level", "correct": false}
+      ]
+  },
+  {
+      "id": 9,
+      "question": "Which operating system is developed by Apple Inc.?",
+      "answers": [
+          {"text": "Windows", "correct": false},
+          {"text": "Linux", "correct": false},
+          {"text": "Android", "correct": false},
+          {"text": "macOS", "correct": true}
+      ]
+  },
+  {
+      "id": 10,
+      "question": "What is the main function of a compiler in programming?",
+      "answers": [
+          {"text": "Translating source code into machine code", "correct": true},
+          {"text": "Executing the program", "correct": false},
+          {"text": "Debugging the code", "correct": false},
+          {"text": "Managing memory allocation", "correct": false}
+      ]
+  }
+]

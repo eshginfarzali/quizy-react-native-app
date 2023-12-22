@@ -1,0 +1,52 @@
+[
+    {
+        "id": 1,
+        "question": "Tennis matches can't end in a tie; there must always be a winner.",
+        "answer": true
+    },
+    {
+        "id": 2,
+        "question": "The highest possible score in a single game of bowling is 300.",
+        "answer": true
+    },
+    {
+        "id": 3,
+        "question": "A 'birdie' in golf means scoring one stroke under par on a hole.",
+        "answer": true
+    },
+    {
+        "id": 4,
+        "question": "Cycling's Tour de France is an annual event that lasts for two weeks.",
+        "answer": false
+    },
+    {
+        "id": 5,
+        "question": "A 'clean sheet' in soccer means a team didn't concede any goals during a match.",
+        "answer": true
+    },
+    {
+        "id": 6,
+        "question": "A baseball game can end in a tie if neither team scores after extra innings.",
+        "answer": false
+    },
+    {
+        "id": 7,
+        "question": "In basketball, a slam dunk is worth three points.",
+        "answer": false
+    },
+    {
+        "id": 8,
+        "question": "In Olympic diving, a perfect score is 10 from each judge.",
+        "answer": true
+    },
+    {
+        "id": 9,
+        "question": "A triathlon consists of three consecutive events: swimming, cycling, and running.",
+        "answer": true
+    },
+    {
+        "id": 10,
+        "question": "The 'offside' rule in soccer only applies to offensive players.",
+        "answer": false
+    }
+]

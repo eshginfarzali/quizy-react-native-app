@@ -1,0 +1,52 @@
+[
+    {
+        "id": 1,
+        "question": "HTML stands for 'Hyper Text Markup Language'.",
+        "answer": true
+    },
+    {
+        "id": 2,
+        "question": "Python is a statically typed programming language.",
+        "answer": false
+    },
+    {
+        "id": 3,
+        "question": "JavaScript can be used for both front-end and back-end web development.",
+        "answer": true
+    },
+    {
+        "id": 4,
+        "question": "GitHub is a version control system.",
+        "answer": false
+    },
+    {
+        "id": 5,
+        "question": "Linux is an open-source operating system.",
+        "answer": true
+    },
+    {
+        "id": 6,
+        "question": "An 'algorithm' is a step-by-step procedure to solve a problem.",
+        "answer": true
+    },
+    {
+        "id": 7,
+        "question": "Java is a low-level programming language.",
+        "answer": false
+    },
+    {
+        "id": 8,
+        "question": "SQL is used for programming interactive websites.",
+        "answer": false
+    },
+    {
+        "id": 9,
+        "question": "In programming, 'OOP' stands for Object-Oriented Programming.",
+        "answer": true
+    },
+    {
+        "id": 10,
+        "question": "An IDE stands for 'Integrated Development Environment'.",
+        "answer": true
+    }
+]

@@ -1,103 +1,102 @@
 [
-    {
-      "question": "Who won the FIFA World Cup in 2018?",
-      "options": [
-        "France",
-        "Brazil",
-        "Germany",
-        "Argentina"
-      ],
-      "correct_answer": "France"
-    },
-    {
-      "question": "Which country has won the most Olympic gold medals in history?",
-      "options": [
-        "United States",
-        "China",
-        "Russia",
-        "Germany"
-      ],
-      "correct_answer": "United States"
-    },
-    {
-      "question": "Who is the all-time leading scorer in NBA history?",
-      "options": [
-        "LeBron James",
-        "Kobe Bryant",
-        "Michael Jordan",
-        "Kareem Abdul-Jabbar"
-      ],
-      "correct_answer": "Kareem Abdul-Jabbar"
-    },
-    {
-      "question": "Which city hosted the 2016 Summer Olympics?",
-      "options": [
-        "Beijing",
-        "Rio de Janeiro",
-        "London",
-        "Sydney"
-      ],
-      "correct_answer": "Rio de Janeiro"
-    },
-    {
-      "question": "Who has won the most Formula 1 World Championships?",
-      "options": [
-        "Sebastian Vettel",
-        "Fernando Alonso",
-        "Lewis Hamilton",
-        "Michael Schumacher"
-      ],
-      "correct_answer": "Lewis Hamilton"
-    },
-    {
-      "question": "Which country hosted the 2014 Winter Olympics?",
-      "options": [
-        "Canada",
-        "Norway",
-        "Russia",
-        "South Korea"
-      ],
-      "correct_answer": "Russia"
-    },
-    {
-      "question": "Who is the fastest man in recorded history?",
-      "options": [
-        "Usain Bolt",
-        "Carl Lewis",
-        "Justin Gatlin",
-        "Asafa Powell"
-      ],
-      "correct_answer": "Usain Bolt"
-    },
-    {
-      "question": "Which team has won the most Super Bowl championships?",
-      "options": [
-        "Dallas Cowboys",
-        "New England Patriots",
-        "Pittsburgh Steelers",
-        "San Francisco 49ers"
-      ],
-      "correct_answer": "New England Patriots"
-    },
-    {
-      "question": "Who is the only boxer to win titles in eight different weight classes?",
-      "options": [
-        "Mike Tyson",
-        "Manny Pacquiao",
-        "Floyd Mayweather Jr.",
-        "Sugar Ray Leonard"
-      ],
-      "correct_answer": "Manny Pacquiao"
-    },
-    {
-      "question": "Which golfer has spent the most consecutive weeks ranked number one in the world?",
-      "options": [
-        "Tiger Woods",
-        "Rory McIlroy",
-        "Phil Mickelson",
-        "Jordan Spieth"
-      ],
-      "correct_answer": "Tiger Woods"
-    }
-  ]
-  
+  {
+      "id": 1,
+      "question": "Which country hosted the 2016 Summer Olympics?",
+      "answers": [
+          {"text": "Brazil", "correct": true},
+          {"text": "China", "correct": false},
+          {"text": "United States", "correct": false},
+          {"text": "France", "correct": false}
+      ]
+  },
+  {
+      "id": 2,
+      "question": "In tennis, what is the term used when a player wins all four Grand Slam titles in a single calendar year?",
+      "answers": [
+          {"text": "Golden Slam", "correct": false},
+          {"text": "Royal Slam", "correct": false},
+          {"text": "Grand Slam", "correct": true},
+          {"text": "Super Slam", "correct": false}
+      ]
+  },
+  {
+      "id": 3,
+      "question": "Who is the all-time top scorer in the history of the NBA (National Basketball Association)?",
+      "answers": [
+          {"text": "Kareem Abdul-Jabbar", "correct": true},
+          {"text": "LeBron James", "correct": false},
+          {"text": "Michael Jordan", "correct": false},
+          {"text": "Kobe Bryant", "correct": false}
+      ]
+  },
+  {
+      "id": 4,
+      "question": "Which city will host the 2024 Summer Olympics?",
+      "answers": [
+          {"text": "Tokyo", "correct": false},
+          {"text": "Paris", "correct": true},
+          {"text": "London", "correct": false},
+          {"text": "Los Angeles", "correct": false}
+      ]
+  },
+  {
+      "id": 5,
+      "question": "In which year did Usain Bolt set the world record in the men's 100 meters sprint, and what was his time?",
+      "answers": [
+          {"text": "2008, 9.58 seconds", "correct": true},
+          {"text": "2012, 9.63 seconds", "correct": false},
+          {"text": "2016, 9.69 seconds", "correct": false},
+          {"text": "2009, 9.69 seconds", "correct": false}
+      ]
+  },
+  {
+      "id": 6,
+      "question": "Who won the FIFA Women's World Cup in 2019?",
+      "answers": [
+          {"text": "United States", "correct": true},
+          {"text": "Germany", "correct": false},
+          {"text": "France", "correct": false},
+          {"text": "England", "correct": false}
+      ]
+  },
+  {
+      "id": 7,
+      "question": "What is the diameter of a basketball hoop in inches?",
+      "answers": [
+          {"text": "16 inches", "correct": false},
+          {"text": "18 inches", "correct": false},
+          {"text": "20 inches", "correct": true},
+          {"text": "24 inches", "correct": false}
+      ]
+  },
+  {
+      "id": 8,
+      "question": "Which country won the UEFA Euro 2020 (played in 2021 due to the COVID-19 pandemic)?",
+      "answers": [
+          {"text": "Italy", "correct": true},
+          {"text": "England", "correct": false},
+          {"text": "Portugal", "correct": false},
+          {"text": "France", "correct": false}
+      ]
+  },
+  {
+      "id": 9,
+      "question": "How many players are there on a rugby union team during play?",
+      "answers": [
+          {"text": "12", "correct": false},
+          {"text": "13", "correct": false},
+          {"text": "14", "correct": false},
+          {"text": "15", "correct": true}
+      ]
+  },
+  {
+      "id": 10,
+      "question": "Which golfer has won the most major championships in golf history?",
+      "answers": [
+          {"text": "Tiger Woods", "correct": false},
+          {"text": "Jack Nicklaus", "correct": true},
+          {"text": "Arnold Palmer", "correct": false},
+          {"text": "Gary Player", "correct": false}
+      ]
+  }
+]
