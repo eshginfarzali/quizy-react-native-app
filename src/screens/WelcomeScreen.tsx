@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
-import { useNavigation } from '@react-navigation/native';import { Image, ImageBackground, StyleSheet, View, Dimensions, TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { Image, ImageBackground, StyleSheet, View, Dimensions, TouchableOpacity } from 'react-native';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -41,10 +42,10 @@ export const WelcomeScreen = () => {
         style={styles.imageBackground}
       >
         <View style={styles.logoContainer}>
-        <TouchableOpacity
-          onPress={goToLogin}
-        >
-          <Image source={logoImage} style={styles.logo} />
+          <TouchableOpacity
+            onPress={goToLogin}
+          >
+            <Image source={logoImage} style={styles.logo} />
           </TouchableOpacity>
         </View>
       </ImageBackground>

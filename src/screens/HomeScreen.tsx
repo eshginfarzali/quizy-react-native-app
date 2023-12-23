@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
-import { Image, ImageBackground, StyleSheet, View, Dimensions, TouchableOpacity, Text } from 'react-native';
+import { Image, ImageBackground, StyleSheet, View, Dimensions, TouchableOpacity, Text, StatusBar } from 'react-native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useForm, Controller } from 'react-hook-form';
 import SelectDropdown from 'react-native-select-dropdown';
+import { useDispatch, useSelector } from 'react-redux';
+
+
+
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -19,6 +23,8 @@ type RootStackParamList = {
     Home: undefined;
     Ranking: undefined;
     Options: undefined;
+    TrueFalse: undefined;
+    Multiple: undefined;
 };
 type HomeScreenNavigationProp = NativeStackNavigationProp<RootStackParamList, 'Home'>;
 
@@ -62,23 +68,24 @@ export const HomeScreen = () => {
 
     const handleStartQuiz = () => {
         console.log('Selected Options:', selectedOptions);
-        if(selectedOptions.type==='TrueFalse'){
-            if(selectedOptions.category==="Software"){
-
-            }else if(selectedOptions.category==="Sport"){
-
-            }
-        } else if(selectedOptions.type==='Multiple'){
-            if(selectedOptions.category==="Software"){
-
-            }else if(selectedOptions.category==="Sport"){
-
-            }
+        if (selectedOptions.type === 'TrueFalse') {
+           
+                navigation.navigate('TrueFalse');
+            
+        } else if (selectedOptions.type === 'Multiple') {
+           
+                navigation.navigate('Multiple');
+         
         }
 
     };
+    function goToType() {
+        throw new Error('Function not implemented.');
+    }
+
     return (
         <View style={styles.container}>
+            <StatusBar backgroundColor={'#6A5AE0'} />
             <ImageBackground source={imageBackground} style={styles.imageBackground}>
                 <View style={styles.starContainer}>
                     <TouchableOpacity onPress={goToRanking}>
@@ -224,8 +231,8 @@ export const HomeScreen = () => {
                         </TouchableOpacity>
                     </View>
                     <View style={styles.clockConatiner}>
-                        <Image source={clockIcon}/>
-                        <Text style={styles.textClock}>{ selectedDifficulty==='low'?20 :selectedDifficulty==='medium'?15 :10} sec</Text>
+                        <Image source={clockIcon} />
+                        <Text style={styles.textClock}>{selectedDifficulty === 'hard' ? 10 : selectedDifficulty === 'medium' ? 15 : 20} sec</Text>
                     </View>
                 </View>
                 <View style={styles.footer}>
@@ -311,8 +318,8 @@ const styles = StyleSheet.create({
         width: 300,
         alignItems: 'center',
         justifyContent: 'space-between',
-        marginBottom:-20,
-        marginLeft:-29,
+        marginBottom: -20,
+        marginLeft: -29,
     },
 
     dropdown: {
@@ -408,7 +415,7 @@ const styles = StyleSheet.create({
         lineHeight: 24,
     },
     selectedButtonTypeText: {
-        color: '#fff', 
+        color: '#fff',
     },
 
 
@@ -431,19 +438,19 @@ const styles = StyleSheet.create({
         color: '#fff',
         marginRight: 90,
     },
-    clockConatiner:{
-        flexDirection:'row',
-        justifyContent:'center',
-        alignItems:'center',
-        gap:5,
+    clockConatiner: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+        gap: 5,
     },
-    textClock:{
+    textClock: {
         fontFamily: 'Poppins',
         fontSize: 25,
         fontWeight: '400',
         lineHeight: 30,
-        color:'#fff'
-        
+        color: '#fff'
+
     },
 
 
