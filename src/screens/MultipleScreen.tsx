@@ -1,22 +1,19 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Dimensions, StatusBar, StyleSheet, Text, View, ImageBackground, Image, TouchableOpacity } from 'react-native'
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { SafeAreaView } from 'react-native-safe-area-context';
-
+import {  useDispatch, useSelector } from 'react-redux';
+import { incrementCorrectAnswers, resetCorrectAnswers } from '../redux/features/counterSlice';
+import {RootState} from '../redux/store'
+import { selectCategory } from '../redux/features/categorySlice';
+import sportQuestions from '../data/Sport.json'
+import softwareQuestions from '../data/Software.json'
+import Timer from '../components/Timer';
 
 const imageBackground = require('../assets/images/background.png');
 const closeIcon = require('../assets/icons/close.png');
-// const category= 'sport';
-// const data = require(`../data/sport.json`);
-// console.log(data)
-// // Assuming 'data' is the array of questions and answers you've logged
-// data.forEach((question: { question: any; answers: any[]; }) => {
-//     console.log(`Question: ${question.question}`);
-//     question.answers.forEach((answer: { text: any; correct: any; }, index: number) => {
-//       console.log(`Answer ${index + 1}: ${answer.text} (Correct: ${answer.correct})`);
-//     });
-//   });
+
    
 
 const windowWidth = Dimensions.get('window').width;
@@ -28,16 +25,80 @@ type RootStackParamList = {
 
 
 };
-type TrueFalseScreenNavigationProp = NativeStackNavigationProp<RootStackParamList, 'TrueFalse'>;
+type MultipleScreenNavigationProp = NativeStackNavigationProp<RootStackParamList, 'TrueFalse'>;
 
 
 export function MultipleScreen() {
     const [selectedAnswer, setSelectedAnswer] = useState<boolean>();
-    const navigation = useNavigation<TrueFalseScreenNavigationProp>();
+    const navigation = useNavigation<MultipleScreenNavigationProp>();
+    const [questionIndex, setQuestionIndex] = useState(0);
+    const [stop, setStop] = useState(false);
+    const [questions, setQuestions] = useState<any[]>([]);
+    const [category, setCategory] = useState('');
+    const selectedCategory = useSelector(selectCategory);
 
-    const goToFinish = () => {
-        navigation.navigate('Finish')
+    const dispatch = useDispatch();
+    const correctAnswersCount = useSelector((state: RootState) => state.correctAnswers.count);
+  useEffect(() => {
+    dispatch(resetCorrectAnswers()); 
+    if (selectedCategory === 'Sport') {
+      setQuestions(sportQuestions);
+      setCategory('Sport');
+   
+    } else if (selectedCategory === 'Software') {
+      setQuestions(softwareQuestions);
+      setCategory('Software');
     }
+    setQuestionIndex(0);
+  }, [selectedCategory]);
+
+  const goToFinish = () => {
+    navigation.navigate('Finish');
+  };
+
+  useEffect(() => {
+   
+    if (selectedAnswer !== undefined) {
+      // const correctAnswer = questions[questionIndex].answer;
+
+      if (selectedAnswer === true) {
+        if (questionIndex + 1 < questions.length) {
+          setSelectedAnswer(undefined);
+          setQuestionIndex(questionIndex + 1);
+          dispatch(incrementCorrectAnswers()); // Doğru cevap verildiğinde sayaç artırılıyor
+          setStop(false);
+        } else {
+          navigation.navigate('Finish');
+        }
+      } else {
+        navigation.navigate('Finish');
+      }
+    }
+  }, [selectedAnswer, questionIndex, questions, navigation, dispatch]);
+  
+  useEffect(() => {
+    if (selectedAnswer !== undefined) {
+        // const correctAnswer = questions[questionIndex].answers.find((answer: { correct: Boolean; }) => answer.correct)?.correct;
+
+        if (selectedAnswer === true) {
+            if (questionIndex + 1 < questions.length) {
+                setSelectedAnswer(undefined);
+                setQuestionIndex(questionIndex + 1);
+                setStop(false);
+            } else {
+                setStop(true); // Bütün sorular bitince setStop true olacak
+            }
+        } else {
+            setStop(true); // Yanlış cevap verildiğinde setStop true olacak
+        }
+    }
+}, [selectedAnswer, questionIndex, questions]);
+
+useEffect(() => {
+    if (stop) {
+        navigation.navigate('Finish');
+    }
+}, [stop]);
     return (
         <SafeAreaView>
             <View style={styles.container}>
@@ -51,7 +112,9 @@ export function MultipleScreen() {
 
                     <View style={styles.headerContainer}>
                         <View style={styles.categoryContainer}>
-                            <Text style={styles.categoryText}>Sport</Text>
+                            <Text style={styles.categoryText}>
+                            <Text style={styles.categoryText}>{category}</Text>
+                            </Text>
                             <TouchableOpacity
                                 onPress={goToFinish}
                             >
@@ -59,8 +122,8 @@ export function MultipleScreen() {
                             </TouchableOpacity>
                         </View>
                         <View style={styles.timerQuestionContainer}>
-                        <Text style={styles.timerText}>1/10</Text>
-                        <Text style={styles.timerText}>00:17</Text>
+                        <Text style={styles.timerText}>{`${questionIndex + 1}/${questions.length}`}</Text>
+                         <Timer setStop={setStop} questionNumber={questionIndex + 1} />
                         </View>
 
                     </View>
@@ -69,47 +132,30 @@ export function MultipleScreen() {
 
                     <View style={styles.questionContainer}>
                         <Text style={styles.questionText}>
-                        "Which Pok&eacute;mon and it&#039;s evolutions were banned from appearing in a main role after the Episode 38 Incident?"
-
+                        {questions[questionIndex]?.question}
                         </Text>
                     </View>
 
 
                     <View style={styles.answerContainer}>
                     <View style={styles.answerContainer}>
-          <TouchableOpacity
-            style={
-              styles.answerButtonTrue
-            }
-            onPress={() => setSelectedAnswer(true)}
-          >
-            <Text style={styles.answerButtonText}>True</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-             style={
-                styles.answerButton
-              }
-              onPress={() => setSelectedAnswer(false)}
-          >
-            <Text style={styles.answerButtonText}>False</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-             style={
-                styles.answerButton
-              }
-              onPress={() => setSelectedAnswer(false)}
-          >
-            <Text style={styles.answerButtonText}>False</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-             style={
-                styles.answerButton
-              }
-              onPress={() => setSelectedAnswer(false)}
-          >
-            <Text style={styles.answerButtonText}>False</Text>
-          </TouchableOpacity>
-        </View>
+  <View style={styles.answerContainer}>
+    {questions[questionIndex]?.answers.map((answer: { correct: boolean, text: string }, index: number) => (
+      <TouchableOpacity
+        key={index}
+        style={styles.answerButton}
+        onPress={() => setSelectedAnswer(answer.correct)}
+      >
+        <Text style={styles.answerButtonText}>{answer.text}</Text>
+      </TouchableOpacity>
+    ))}
+  </View>
+</View>
+
+              
+
+          
+        
 
                     </View>
                 </ImageBackground>

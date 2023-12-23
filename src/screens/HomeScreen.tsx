@@ -7,7 +7,8 @@ import SelectDropdown from 'react-native-select-dropdown';
 import { useDispatch, useSelector } from 'react-redux';
 
 
-
+import { setCategory, selectCategory } from '../redux/features/categorySlice'; 
+import { setDifficulty, selectDifficulty } from '../redux/features/difficultySlice'; 
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -37,14 +38,18 @@ type FormData = {
 export const HomeScreen = () => {
     const navigation = useNavigation<HomeScreenNavigationProp>();
     const { control } = useForm<FormData>();
-    const [selectedDifficulty, setSelectedDifficulty] = useState('');
+    // const [selectedDifficulty, setSelectedDifficulty] = useState('');
     const [selectedType, setSelectedType] = useState('');
-    const [selectedCategory, setSelectedCategory] = useState('Sport');
+    // const [selectedCategory, setSelectedCategory] = useState('Sport');
     const [selectedOptions, setSelectedOptions] = useState<FormData>({
         category: 'Sport',
         difficulty: 'low',
         type: 'TrueFalse',
     });
+
+    const dispatch = useDispatch();
+    const selectedCategory = useSelector(selectCategory);
+    const selectedDifficulty = useSelector(selectDifficulty);
 
     const goToRanking = () => {
         navigation.navigate('Ranking');
@@ -52,7 +57,7 @@ export const HomeScreen = () => {
 
 
     const handleDifficultySelection = (difficulty: string) => {
-        setSelectedDifficulty(difficulty);
+        dispatch(setDifficulty(difficulty));
         setSelectedOptions({ ...selectedOptions, difficulty });
     };
 
@@ -62,7 +67,7 @@ export const HomeScreen = () => {
     };
 
     const handleCategorySelection = (category: string) => {
-        setSelectedCategory(category);
+        dispatch(setCategory(category))
         setSelectedOptions({ ...selectedOptions, category });
     };
 
@@ -85,7 +90,7 @@ export const HomeScreen = () => {
 
     return (
         <View style={styles.container}>
-            <StatusBar backgroundColor={'#6A5AE0'} />
+            <StatusBar backgroundColor={'#6A5AE0'} barStyle="light-content"/>
             <ImageBackground source={imageBackground} style={styles.imageBackground}>
                 <View style={styles.starContainer}>
                     <TouchableOpacity onPress={goToRanking}>
