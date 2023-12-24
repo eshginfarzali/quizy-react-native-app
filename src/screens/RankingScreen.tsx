@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigation } from '@react-navigation/native'; import { Image, ImageBackground, StyleSheet, View, Dimensions, TouchableOpacity, Text } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { Image, ImageBackground, StyleSheet, View, Dimensions, TouchableOpacity, Text } from 'react-native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-
 import { openDatabase } from 'react-native-sqlite-storage';
+import { useSelector } from 'react-redux';
+import { RootState } from '../redux/store';
 
 const db = openDatabase({
   name: 'rn_sqlite',
@@ -14,62 +16,87 @@ const windowHeight = Dimensions.get('window').height;
 const imageBackground = require('../assets/images/background.png');
 const arrowleft = require('../assets/icons/arrowleft.png');
 
-
 type RootStackParamList = {
   Home: undefined;
   Ranking: undefined;
 };
+
 type RankingScreenNavigationProp = NativeStackNavigationProp<RootStackParamList, 'Ranking'>;
 
-
-const getLastAddedUserName = () => {
-  return new Promise(async (resolve, reject) => {
-    (await db).transaction((tx) => {
-      tx.executeSql(
-        'SELECT name FROM users ORDER BY name DESC LIMIT 1',
-        [],
-        (_, results) => {
-          if (results.rows.length > 0) {
-            const lastUserName = results.rows.item(0)?.name
-            if (lastUserName) {
-              resolve(lastUserName);
-            } else {
-              reject(new Error('User name is undefined.'));
-            }
-          } else {
-            reject(new Error('No user found.'));
-          }
-        },
-        (_, error) => {
-          reject(error);
-        }
-      );
-
-    });
-  });
-};
-
-
 export const RankingScreen = () => {
-
   const navigation = useNavigation<RankingScreenNavigationProp>();
   const [lastUserInitial, setLastUserInitial] = useState('');
+  const [userList, setUserList] = useState<string[]>([]);
+  const correctAnswersCount = useSelector((state: RootState) => state.correctAnswers.count);
+  const score = correctAnswersCount * 10;
 
   useEffect(() => {
     getLastAddedUserName()
       .then((lastUserName) => {
         if (lastUserName && typeof lastUserName === 'string' && lastUserName.length > 0) {
-          const initial = lastUserName.charAt(0).toUpperCase;
+          const initial = lastUserName.charAt(0).toUpperCase();
           setLastUserInitial(initial);
         } else {
           setLastUserInitial('E');
         }
       })
-      .catch((error) => {
-
+      .catch(() => {
         setLastUserInitial('E');
       });
+
+    (async () => {
+      try {
+        const dbInstance = await db;
+        dbInstance.transaction((tx) => {
+          tx.executeSql(
+            'SELECT name FROM users ORDER BY name DESC',
+            [],
+            (_, results) => {
+              const names: string[] = [];
+              for (let i = 0; i < results.rows.length; i++) {
+                names.push(results.rows.item(i)?.name || '');
+              }
+              setUserList(names.reverse());
+            },
+            (_, error) => {
+              console.error('Error while fetching user names:', error);
+            }
+          );
+        });
+      } catch (error) {
+        console.error('Database error:', error);
+      }
+    })();
   }, []);
+
+  const getLastAddedUserName = () => {
+    return new Promise<string>((resolve, reject) => {
+      (async () => {
+        try {
+          const dbInstance = await db;
+          dbInstance.transaction((tx) => {
+            tx.executeSql(
+              'SELECT name FROM users ORDER BY name DESC LIMIT 1',
+              [],
+              (_, results) => {
+                if (results.rows.length > 0) {
+                  const lastUserName = results.rows.item(0)?.name || '';
+                  resolve(lastUserName);
+                } else {
+                  reject(new Error('No user found.'));
+                }
+              },
+              (_, error) => {
+                reject(error);
+              }
+            );
+          });
+        } catch (error) {
+          reject(error);
+        }
+      })();
+    });
+  };
 
   const goToHome = () => {
     navigation.navigate('Home');
@@ -77,21 +104,14 @@ export const RankingScreen = () => {
 
   return (
     <View style={styles.container}>
-      <ImageBackground
-        source={imageBackground}
-        style={styles.imageBackground}
-      >
-        <TouchableOpacity
-          onPress={goToHome}
-        >
+      <ImageBackground source={imageBackground} style={styles.imageBackground}>
+        <TouchableOpacity onPress={goToHome}>
           <View style={styles.headerContainer}>
             <Image source={arrowleft} style={styles.leftIcon} />
             <Text style={styles.headerText}>Rankings</Text>
           </View>
         </TouchableOpacity>
         <View style={styles.rankingContainer}>
-
-
           <View style={styles.columnContainer}>
             <View style={styles.ImageContainer}>
               <Text style={styles.textName}>Y</Text>
@@ -120,30 +140,18 @@ export const RankingScreen = () => {
           </View>
 
         </View>
-
         <View style={styles.userRankingsConatiner}>
-          <View style={styles.userItem}>
-            <Text style={styles.textUser}>4.User 4</Text>
-            <Text style={styles.textUser}>20</Text>
-          </View>
-          <View style={styles.userItem}>
-            <Text style={styles.textUser}>5.User 5</Text>
-            <Text style={styles.textUser}>10</Text>
-          </View>
-          <View style={styles.userItem}>
-            <Text style={styles.textUser}>4.User 6</Text>
-            <Text style={styles.textUser}>10</Text>
-          </View>
-          <View style={styles.userItem}>
-            <Text style={styles.textUser}>4.User 7</Text>
-            <Text style={styles.textUser}>10</Text>
-          </View>
+          {userList.map((user, index) => (
+            <View key={index} style={styles.userItem}>
+              <Text style={styles.textUser}>{`${index + 3 + 1}. ${user}`}</Text>
+              <Text style={styles.textUser}>{score}</Text>
+            </View>
+          ))}
         </View>
       </ImageBackground>
     </View>
-  )
-}
-
+  );
+};
 const styles = StyleSheet.create({
   container: {
     flex: 1,
