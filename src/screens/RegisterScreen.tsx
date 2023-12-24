@@ -106,6 +106,7 @@ export const RegisterScreen = () => {
                   onBlur={onBlur}
                   onChangeText={onChange}
                   value={value}
+                  placeholder="Enter name"
                 />
               )}
               name="name"
@@ -136,6 +137,7 @@ export const RegisterScreen = () => {
                 onBlur={onBlur}
                 onChangeText={(value) => onChange(value)}
                 value={value}
+                placeholder="Enter email"
               />
             )}
             name="email"
@@ -166,6 +168,7 @@ export const RegisterScreen = () => {
                   onChangeText={onChange}
                   value={value}
                   secureTextEntry={true}
+                  placeholder="Enter password"
                 />
               )}
               name="password"
@@ -197,6 +200,7 @@ export const RegisterScreen = () => {
                   onChangeText={onChange}
                   value={value}
                   secureTextEntry={true}
+                  placeholder="Enter confirm password"
                 />
               )}
               name="confirmPassword"
