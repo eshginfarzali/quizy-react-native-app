@@ -130,7 +130,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   textTitleContainer: {
-    // flex: 1,
   },
   textTitle: {
     fontSize: 24,

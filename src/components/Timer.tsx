@@ -9,10 +9,8 @@ interface TimerProps {
 }
 
 export const Timer: React.FC<TimerProps> = ({ setStop, questionNumber }: TimerProps) => {
-  // const dispatch = useDispatch();
   const selectedDifficulty = useSelector(selectDifficulty);
-  const [timer, setTimer] = useState<number>(20); // Default value set to 20 seconds
-
+  const [timer, setTimer] = useState<number>(20); 
   useEffect(() => {
     if (selectedDifficulty === 'medium') {
       setTimer(15);

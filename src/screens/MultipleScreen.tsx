@@ -59,13 +59,11 @@ export function MultipleScreen() {
   useEffect(() => {
    
     if (selectedAnswer !== undefined) {
-      // const correctAnswer = questions[questionIndex].answer;
-
       if (selectedAnswer === true) {
         if (questionIndex + 1 < questions.length) {
           setSelectedAnswer(undefined);
           setQuestionIndex(questionIndex + 1);
-          dispatch(incrementCorrectAnswers()); // Doğru cevap verildiğinde sayaç artırılıyor
+          dispatch(incrementCorrectAnswers()); 
           setStop(false);
         } else {
           navigation.navigate('Finish');
@@ -78,18 +76,16 @@ export function MultipleScreen() {
   
   useEffect(() => {
     if (selectedAnswer !== undefined) {
-        // const correctAnswer = questions[questionIndex].answers.find((answer: { correct: Boolean; }) => answer.correct)?.correct;
-
         if (selectedAnswer === true) {
             if (questionIndex + 1 < questions.length) {
                 setSelectedAnswer(undefined);
                 setQuestionIndex(questionIndex + 1);
                 setStop(false);
             } else {
-                setStop(true); // Bütün sorular bitince setStop true olacak
+                setStop(true); 
             }
         } else {
-            setStop(true); // Yanlış cevap verildiğinde setStop true olacak
+            setStop(true); 
         }
     }
 }, [selectedAnswer, questionIndex, questions]);
@@ -248,10 +244,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 62,
         marginBottom: 12,
         backgroundColor: '#FD3654',
-      },
-
-     
-     
+      },   
       answerButtonText: {
         fontFamily: 'Poppins',
         fontSize: 19,

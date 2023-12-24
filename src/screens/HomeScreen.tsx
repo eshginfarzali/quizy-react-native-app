@@ -7,8 +7,8 @@ import SelectDropdown from 'react-native-select-dropdown';
 import { useDispatch, useSelector } from 'react-redux';
 
 
-import { setCategory, selectCategory } from '../redux/features/categorySlice'; 
-import { setDifficulty, selectDifficulty } from '../redux/features/difficultySlice'; 
+import { setCategory, selectCategory } from '../redux/features/categorySlice';
+import { setDifficulty, selectDifficulty } from '../redux/features/difficultySlice';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -38,9 +38,7 @@ type FormData = {
 export const HomeScreen = () => {
     const navigation = useNavigation<HomeScreenNavigationProp>();
     const { control } = useForm<FormData>();
-    // const [selectedDifficulty, setSelectedDifficulty] = useState('');
     const [selectedType, setSelectedType] = useState('');
-    // const [selectedCategory, setSelectedCategory] = useState('Sport');
     const [selectedOptions, setSelectedOptions] = useState<FormData>({
         category: 'Sport',
         difficulty: 'low',
@@ -72,15 +70,10 @@ export const HomeScreen = () => {
     };
 
     const handleStartQuiz = () => {
-        console.log('Selected Options:', selectedOptions);
         if (selectedOptions.type === 'TrueFalse') {
-           
-                navigation.navigate('TrueFalse');
-            
+            navigation.navigate('TrueFalse');
         } else if (selectedOptions.type === 'Multiple') {
-           
-                navigation.navigate('Multiple');
-         
+            navigation.navigate('Multiple');
         }
 
     };
@@ -90,7 +83,7 @@ export const HomeScreen = () => {
 
     return (
         <View style={styles.container}>
-            <StatusBar backgroundColor={'#6A5AE0'} barStyle="light-content"/>
+            <StatusBar backgroundColor={'#6A5AE0'} barStyle="light-content" />
             <ImageBackground source={imageBackground} style={styles.imageBackground}>
                 <View style={styles.starContainer}>
                     <TouchableOpacity onPress={goToRanking}>
@@ -99,8 +92,6 @@ export const HomeScreen = () => {
                 </View>
 
                 <View style={styles.formContainer}>
-
-
                     <Controller
                         control={control}
                         render={({ field: { onChange, value } }) => (
@@ -304,7 +295,6 @@ const styles = StyleSheet.create({
 
     },
     dropdownButton: {
-
         paddingHorizontal: 16,
         paddingVertical: 12,
         marginBottom: 20,
@@ -313,7 +303,6 @@ const styles = StyleSheet.create({
         opacity: 0,
         backgroundColor: '#6A5AE0',
         color: '#fff',
-
     },
     buttonTextStyle: {
         color: '#6A5AE0'
@@ -389,8 +378,6 @@ const styles = StyleSheet.create({
     },
     selectedButtonHard: {
         backgroundColor: '#FD3654',
-
-
     },
     difficultyButton: {
         backgroundColor: '#fff',
@@ -422,9 +409,6 @@ const styles = StyleSheet.create({
     selectedButtonTypeText: {
         color: '#fff',
     },
-
-
-
     btnQuiz: {
         width: 311,
         height: 60,
@@ -457,10 +441,6 @@ const styles = StyleSheet.create({
         color: '#fff'
 
     },
-
-
-
-
     arrowWImage: {
         marginRight: 3,
     },

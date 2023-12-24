@@ -22,11 +22,8 @@ type TrueFalseScreenNavigationProp = NativeStackNavigationProp<RootStackParamLis
 
 
 export function FinishScreen() {
-    // const selectedCategory = useSelector((state: RootState) => state.category.selectedCategory);
     const correctAnswersCount = useSelector((state: RootState) => state.correctAnswers.count);
-
-    const score = correctAnswersCount * 10; // Doğru cevap sayısını skora çevirme
-
+    const score = correctAnswersCount * 10;
     const selectedCategory = useSelector(selectCategory);
     const navigation = useNavigation<TrueFalseScreenNavigationProp>();
 
@@ -43,7 +40,6 @@ export function FinishScreen() {
                     source={imageBackground}
                     style={styles.imageBackground}
                 >
-
                     <View style={styles.headerContainer}>
                         <View style={styles.categoryContainer}>
                             <Text style={styles.categoryText}>
@@ -55,12 +51,7 @@ export function FinishScreen() {
                                 <Image source={closeIcon} />
                             </TouchableOpacity>
                         </View>
-
-
                     </View>
-
-
-
                     <View style={styles.resultContainer}>
                         <Text style={styles.resultText}>
                             Correct: {correctAnswersCount}
@@ -69,8 +60,6 @@ export function FinishScreen() {
                             Score: {score}
                         </Text>
                     </View>
-
-
                     <View style={styles.answerContainer}></View>
                 </ImageBackground>
             </View>
@@ -106,12 +95,9 @@ const styles = StyleSheet.create({
         fontSize: 24,
         fontWeight: '500',
         color: '#fff',
-
     },
 
-
     resultContainer: {
-
         gap: 10,
     },
     resultText: {
@@ -123,8 +109,6 @@ const styles = StyleSheet.create({
         color: '#fff',
 
     },
-
-
 
     answerContainer: {
 

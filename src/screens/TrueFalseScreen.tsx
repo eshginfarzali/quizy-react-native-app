@@ -12,12 +12,10 @@ import {
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import {  useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { incrementCorrectAnswers, resetCorrectAnswers } from '../redux/features/counterSlice';
-import {RootState} from '../redux/store';
+import { RootState } from '../redux/store';
 import { Timer } from '../components/Timer';
-// Import your Redux selectors and slices here
-// import { selectDifficulty } from '../redux/features/difficultySlice';
 import { selectCategory } from '../redux/features/categorySlice';
 
 const imageBackground = require('../assets/images/background.png');
@@ -40,8 +38,6 @@ import sportQuestions from '../data/Sport-true-false.json'
 import softwareQuestions from '../data/Software-true-false.json'
 
 
-
-
 export function TrueFalseScreen() {
   const [selectedAnswer, setSelectedAnswer] = useState<boolean | undefined>();
   const [questionIndex, setQuestionIndex] = useState(0);
@@ -55,7 +51,7 @@ export function TrueFalseScreen() {
   const correctAnswersCount = useSelector((state: RootState) => state.correctAnswers.count);
 
   useEffect(() => {
-    dispatch(resetCorrectAnswers()); 
+    dispatch(resetCorrectAnswers());
     if (selectedCategory === 'Sport') {
       setQuestions(sportQuestions);
       setCategory('Sport');
@@ -88,7 +84,7 @@ export function TrueFalseScreen() {
       }
     }
   }, [selectedAnswer, questionIndex, questions, navigation, dispatch]);
-  
+
   useEffect(() => {
     if (stop) {
       navigation.navigate('Finish');

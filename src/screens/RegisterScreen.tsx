@@ -60,7 +60,7 @@ export const RegisterScreen = () => {
       Alert.alert('Error', 'Passwords do not match.');
       return;
     }
-    console.log(data); 
+  
 
     (await  db).transaction((tx) => {
       tx.executeSql(
@@ -68,10 +68,9 @@ export const RegisterScreen = () => {
         [data.name, data.email, data.password],
         (tx, results) => {
           if (results.rowsAffected > 0) {
-            console.log('Registration data saved successfully');
             navigation.navigate('Login'); 
           } else {
-            console.log('Failed to save registration data');
+  
           }
         },
         (error) => {

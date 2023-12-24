@@ -5,12 +5,12 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useForm, Controller } from 'react-hook-form';
 import { openDatabase } from 'react-native-sqlite-storage';
 
-const arrowBackIcons = require('../assets/icons/arrowBack.png');
-const arrowWImage = require('../assets/icons/arrowWhite.png');
-
 const db = openDatabase({
   name: 'rn_sqlite',
 });
+const arrowBackIcons = require('../assets/icons/arrowBack.png');
+const arrowWImage = require('../assets/icons/arrowWhite.png');
+
 
 type RootStackParamList = {
   Home: undefined;
@@ -36,8 +36,6 @@ export const LoginScreen = () => {
 
   const onSubmit = async (data: FormData) => {
     const { email, password } = data;
-
-    // Check credentials from the database
     try {
       const dbResult = await checkUserCredentials(email, password);
       if (dbResult) {
@@ -60,7 +58,7 @@ export const LoginScreen = () => {
             if (results.rows.length > 0) {
               resolve(true);
             } else {
-              resolve(false); 
+              resolve(false);
             }
           },
           (_, error) => {
@@ -73,9 +71,9 @@ export const LoginScreen = () => {
 
   return (
     <View style={styles.container}>
-       <StatusBar backgroundColor={'#EFEEFC'} 
-            barStyle="dark-content"
-            />
+      <StatusBar backgroundColor={'#EFEEFC'}
+        barStyle="dark-content"
+      />
       <TouchableOpacity onPress={() => navigation.navigate('Options')}>
         <View style={styles.headerContainer}>
           <Image source={arrowBackIcons} />
@@ -172,7 +170,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     paddingLeft: 5,
     color: '#121212',
-    fontSize:20,
+    fontSize: 20,
   },
   btnLogin: {
     width: 311,
